@@ -1,0 +1,15 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.card{
+    width: 33%;
+}
+
+.intern{
+    background-color: lawngreen;
+}
+
+.manager{
+    background-color:fuchsia;
+}

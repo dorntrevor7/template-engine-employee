@@ -15,8 +15,7 @@ const html = render([
     new Engineer("Trevor", 2, "trev@2u.com", "dorntrevor7"),
     new Intern("Mike", 3, "mike@2u.com", "UofA")
 ])
-console.log(html);
-
+console.log(html)
 fs.writeFile(outputPath, html, () => { });
 
 
