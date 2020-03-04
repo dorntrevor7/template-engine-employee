@@ -10,34 +10,155 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const html = render([
-    new Manager("Tucker", 1, "tucker@2u.com", 214),
-    new Engineer("Trevor", 2, "trev@2u.com", "dorntrevor7"),
-    new Intern("Mike", 3, "mike@2u.com", "UofA")
-])
-console.log(html)
-fs.writeFile(outputPath, html, () => { });
+// creating a new variable to push all employees into
+const employees = [];
 
+// invoke the function
+askQ();
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+// creating a function to get the questions to reaccur
+function askQ() {
+    // prompts the user questions to put in their repo using inquirer npm
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "What employee is needed?",
+            name: "employee",
+            choices: [
+                "Manager",
+                "Engineer",
+                "Intern",
+                "none"
+            ]
+        },
+    ]).then(function (data) {
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+        // choosing the different manager, intern, engineer
+        switch (data.employee) {
+            // asks the manager question
+            case "Manager":
+                manager();
+                break;
+            // ask the engineers question
+            case "Engineer":
+                engineer();
+                break;
+            // ask the intern questions
+            case "Intern":
+                intern();
+                break;
+            // exits the questions
+            case "none":
+                // calls the render js and displays all the employee attr in the html file 
+                var page = render(employees);
+                fs.writeFile(outputPath, page, () => {});
+                break;
+        };
+    });
+}
+// creating a function for engineer inquirer
+function engineer() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employees name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is the employees email?",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "What is the employees id number?",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "What is your Github account?",
+            name: "github",
+        },
+    ]).then(function (response) {
+        var engineer = new Engineer(
+            response.name,
+            response.email,
+            response.id,
+            response.github);
+        // pushs the responses from the engineer into the html array
+        employees.push(engineer);
+        // prompts the askQ function again
+        askQ();
+    })
+}
+// Creating a function to display the intern
+function manager() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employees name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is the employees email?",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "What is the employees id number?",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "What is the employees office number?",
+            name: "officeNumber",
+        },
+    ]).then(function (response) {
+        var manager = new Manager(
+            response.name,
+            response.email,
+            response.id,
+            response.officeNumber);
+        // pushs the responses from the manager into the html array
+        employees.push(manager);
+        // prompts the askQ function again
+        askQ();
+    })
+}
 
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an 
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work!```
+// Creating a function to display the intern
+function intern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employees name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is the employees email?",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "What is the employees id number?",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "What is shool does the intern go to?",
+            name: "school",
+        },
+    ]).then(function (response) {
+        var intern = new Intern(
+            response.name,
+            response.email,
+            response.id,
+            response.school);
+        // pushs the responses from the engineer into the html array\
+        employees.push(intern);
+        // prompts the askQ function again
+        askQ();
+    })
+}
