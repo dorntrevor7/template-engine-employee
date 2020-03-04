@@ -27,5 +27,5 @@ The following image displays the start page:
 
 <br>
 
-Here's the link: [Click Me](https://dorntrevor7.github.io/template-engine-employee/)
+Here's the link: [Click Me](https://dorntrevor7.github.io/template-engine-employee/output/team.html)
 
