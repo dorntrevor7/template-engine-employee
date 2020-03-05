@@ -11,8 +11,8 @@ so that I have quick access to emails and GitHub profiles
 ```
 
 * Fuschia: Manager
-* Grey: intern
-* Green: Engineer
+* Grey: Engineer
+* Green: Intern
 
 <br>
 
