@@ -51,7 +51,7 @@ function askQ() {
             case "none":
                 // calls the render js and displays all the employee attr in the html file 
                 var page = render(employees);
-                fs.writeFile(outputPath, page, () => {});
+                fs.writeFile(outputPath, page, () => { });
                 break;
         };
     });
